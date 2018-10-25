@@ -1,0 +1,46 @@
+<!--
+  ~  /*
+  ~  *    Copyright 2018 InfAI (CC SES)
+  ~  *
+  ~  *    Licensed under the Apache License, Version 2.0 (the “License”);
+  ~  *    you may not use this file except in compliance with the License.
+  ~  *    You may obtain a copy of the License at
+  ~  *
+  ~  *        http://www.apache.org/licenses/LICENSE-2.0
+  ~  *
+  ~  *    Unless required by applicable law or agreed to in writing, software
+  ~  *    distributed under the License is distributed on an “AS IS” BASIS,
+  ~  *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~  *    See the License for the specific language governing permissions and
+  ~  *    limitations under the License.
+  ~  */
+  -->
+
+<div class="outer">
+<form [formGroup]="form">
+  <mat-form-field class="example-full-width">
+    <input matInput formControlName="name" placeholder="Client Name">
+  </mat-form-field>
+
+  <div formArrayName="redirectUris">
+    <div *ngFor="let redirectUri of form['controls'].redirectUris.controls; index as i">
+      <mat-form-field class="example-full-width">
+        <input matInput [formControlName]="i" placeholder="Redirect URI">
+      </mat-form-field>
+    </div>
+  </div>
+  <button (click)="addRedirectUri()" color="primary" type="submit" mat-raised-button>{{'ADD' | translate}}</button>
+
+  <div formArrayName="webOrigins">
+    <div *ngFor="let webOrigin of form['controls'].webOrigins.controls; index as i">
+      <mat-form-field class="example-full-width">
+        <input matInput [formControlName]="i" placeholder="Access-Control-Allow-Origin">
+      </mat-form-field>
+    </div>
+  </div>
+  <button (click)="addWebOrigins()" color="primary" type="submit" mat-raised-button>{{'ADD' | translate}}</button>
+
+
+  <button (click)="submit()" color="primary" type="submit" mat-raised-button>{{'CREATE' | translate}}</button>
+</form>
+</div>

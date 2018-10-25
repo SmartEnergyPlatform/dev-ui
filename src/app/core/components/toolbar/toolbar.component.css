@@ -1,0 +1,163 @@
+/*
+ *  /*
+ *  *    Copyright 2018 InfAI (CC SES)
+ *  *
+ *  *    Licensed under the Apache License, Version 2.0 (the “License”);
+ *  *    you may not use this file except in compliance with the License.
+ *  *    You may obtain a copy of the License at
+ *  *
+ *  *        http://www.apache.org/licenses/LICENSE-2.0
+ *  *
+ *  *    Unless required by applicable law or agreed to in writing, software
+ *  *    distributed under the License is distributed on an “AS IS” BASIS,
+ *  *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  *    See the License for the specific language governing permissions and
+ *  *    limitations under the License.
+ *
+ */
+
+img {
+    max-height: 48px;
+    margin-left: 10px;
+}
+
+mat-toolbar {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 0 0.4rem rgba(0, 0, 0, .1), 0 0.4rem 0.8rem rgba(0, 0, 0, .2);
+}
+
+mat-toolbar {
+    position: absolute;
+    z-index: 10;
+}
+
+.fill {
+    flex: 1;
+}
+
+mat-toolbar button {
+    background: none;
+    border: none;
+    color: white;
+    margin-left: 5%;
+}
+
+.md-search__form {
+    margin-left: 1.5%;
+}
+
+mat-toolbar > a {
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: white;
+    margin-left: 1.5%;
+    text-decoration: none;
+    display: flex;
+}
+
+.example-sidenav-container {
+    /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+       causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+    flex: 1;
+}
+
+.example-is-mobile .example-sidenav-container {
+    /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
+       `<body>` to be our scrolling element for mobile layouts. */
+    flex: 1 0 auto;
+}
+
+input {
+    font-weight: 300;
+    color: black;
+}
+
+mat-nav-list a {
+    border-bottom: .1rem solid rgba(0,0,0,.07);
+}
+
+i {
+    color: white;
+}
+
+.search-focused input {
+    background-color:  white;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+}
+
+.search-focused .md-search__icon {
+    color:  black;
+}
+
+.search-results {
+    display: none;
+    -webkit-transition: 0.2s; /* Safari */
+    transition: 0.2s;
+    width: 100%;
+}
+
+.md-search__icon {
+    color: white;
+}
+
+.mat-toolbar-row, .mat-toolbar-single-row {
+    white-space: normal;
+}
+
+.search-results-focused {
+    display: block;
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12), 0 3px 5px -1px rgba(0,0,0,.4);
+    position: absolute;
+    top: 3.6rem;
+    z-index: 10;
+    background: white;
+}
+
+/* Mobile Search */
+.mobile_search_hidden {
+    display: none;
+}
+
+.mobile_search_visible {
+    display: block;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: white;
+    z-index: 10;
+}
+
+.mobile_search_visible i {
+    color: black;
+}
+
+
+.mobile_search_visible input {
+    border: none;
+    background: white;
+    font-size: 1.8em;
+    padding: 0 4.4rem 0 7.2rem;
+    font-family: "Roboto","Helvetica Neue",Helvetica,Arial,sans-serif;
+    width: 90%;
+}
+
+.input_outer {
+    display: flex;
+    padding: 20px;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.second-level a {
+    font-size: 1.4rem;
+    margin-left: 20px;
+}
