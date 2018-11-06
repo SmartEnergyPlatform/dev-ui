@@ -51,6 +51,7 @@ import { StartComponent } from './start/start.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 
+
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
@@ -67,7 +68,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     StartComponent,
-    Dialog
+    Dialog,
+
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

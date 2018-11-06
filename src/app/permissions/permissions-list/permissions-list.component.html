@@ -46,7 +46,7 @@
       <ng-container matColumnDef="edit">
           <mat-header-cell *matHeaderCellDef> Edit </mat-header-cell>
           <mat-cell *matCellDef="let element">
-              <button (click)="deletePolicy(element)"><i class="material-icons" >edit</i></button>
+              <button (click)="editPolicy(element)"><i class="material-icons" >edit</i></button>
           </mat-cell>
       </ng-container>
 
@@ -54,5 +54,5 @@
       <mat-row *matRowDef="let row; columns: displayedColumns;">
       </mat-row>
     </mat-table>
-    <button color="primary" mat-raised-button (click)="createPolicy()">Policy erstellen</button>
+    <button color="primary" mat-raised-button style="width: 100%; margin-bottom: 5%;" (click)="createPolicy()">Policy erstellen</button>
 </section>

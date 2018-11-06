@@ -75,22 +75,16 @@ export class PermissionsListComponent {
     this.router.navigate(["/permissions/add"])
   }
 
-  deletePolicy(policy) {
+  editPolicy() {
+      this.router.navigate(["/permissions/edit"])
+  }
+
+    deletePolicy(policy) {
     console.log("delete policy " + policy["id"])
     this.ladonService.deletePolicy(policy).then(response => {
       console.log(response)
       this.loadPolicies()
     })
   }
-
-  editPolicy(policy) {
-      console.log("delete policy " + policy["id"])
-      this.ladonService.putPolicy(policy).then(response => {
-          console.log(response)
-          this.loadPolicies()
-      })
-  }
-
-
 
 }

@@ -28,6 +28,7 @@ import {
 } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { PermissionsEditComponent } from './permissions-edit/permissions-edit.component';
 
 @Component({
   template: '<router-outlet></router-outlet>',
@@ -49,6 +50,11 @@ const routes: Routes = [
         path: '',
         component: PermissionsListComponent,
         canActivate: [ValidTokenGuard]
+      },
+      {
+          path: 'edit',
+          component: PermissionsEditComponent,
+          canActivate: [ValidTokenGuard]
       }
     ]
   }
@@ -66,7 +72,9 @@ const routes: Routes = [
   declarations: [
     PermissionsAddComponent,
     PermissionsListComponent,
-    RoutingComponent
+    PermissionsEditComponent,
+    RoutingComponent,
+    PermissionsEditComponent
   ]
 })
 export class PermissionsModule { }
