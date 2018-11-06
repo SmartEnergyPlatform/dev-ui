@@ -1,56 +1,57 @@
 <!--
-  ~  Copyright  2018 InfAI (CC SES)
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the “License”); you may not use this file except in compliance with the License. You may obtain a copy of the License at
-  ~
-  ~  http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an “AS IS” BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
-  ~
-  ~
+  ~ /*
+  ~ *      2018 InfAI (CC SES)
+  ~ *
+  ~ *    Licensed under the Apache License, Version 2.0 (the “License”);
+  ~ *    you may not use this file except in compliance with the License.
+  ~ *    You may obtain a copy of the License at
+  ~ *
+  ~ *        http://www.apache.org/licenses/LICENSE-2.0
+  ~ *
+  ~ *    Unless required by applicable law or agreed to in writing, software
+  ~ *    distributed under the License is distributed on an “AS IS” BASIS,
+  ~ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ *    See the License for the specific language governing permissions and
+  ~ *    limitations under the License.
+  ~ */
   -->
 
-<mat-sidenav-container class="example-sidenav-container"
-                       fullscreen>
-
-    <!--<mat-sidenav disableClose
+<mat-sidenav-container>
+    <mat-sidenav #sidenav
+                 disableClose
                  role="navigation"
-                 #sidenav
                  [fixedInViewport]='true'
                  class="sidenav"
                  class="mat-elevation-z1"
-                 opened mode = "side"
-                 >
-            <li *ngFor="let section of sections" class="list-style">
-                <div [ngClass]="{'background-color-accent': isSectionOpen(section)}" routerLinkActive="background-color-accent" >
+                 opened mode = "side">
+        <ul class="side-menu">
+            <li *ngFor="let section of sections">
                 <button mat-button
                         type=button
                         routerLink="{{section.state}}"
+                        routerLinkActive="background-color-accent"
                         *ngIf="section.type === 'link'"
                         (click)="toggleSection(section)"
-                        class="md-button-toggle"
-                        fxLayout="row"
-                        fxLayoutAlign=" center"
-                        fxFill
-
-                        routerLink="{{section.state}}">
-                        <mat-icon class="dif-list">{{section.icon}}</mat-icon>
-                        {{section.name | uppercase}}
+                        class="md-button-toggle">
+                    <mat-icon>{{section.icon}}</mat-icon>
+                    {{section.name | uppercase}}
                 </button>
-                </div>
-
 
                 <button mat-button
                         *ngIf="section.type === 'toggle'"
                         (click)="toggleSection(section)"
                         [ngClass]="{'background-color-accent': isSectionOpen(section)}"
-                        class="md-button-toggle"
-                        fxFill>
-                    <div fxLayout="row" fxLayoutAlign=" center">
-                        <mat-icon class="dif-list">{{section.icon}}</mat-icon>
-                        <div fxFlexOffset="5px">{{section.name | uppercase}}</div>
-                        <mat-icon style="margin-left: 10%;"
-                                  class="md-toggle-icon"
+                        class="md-button-toggle">
+                    <div fxLayout="row"
+                         fxLayoutAlign=" center">
+                        <mat-icon>
+                            {{section.icon}}
+                        </mat-icon>
+                        <div fxFlexOffset="5px">
+                            {{section.name | uppercase}}
+                        </div>
+
+                        <mat-icon class="md-toggle-icon"
                                   [ngClass]="{'toggled': isSectionOpen(section)}">
                             keyboard_arrow_down
                         </mat-icon>
@@ -59,103 +60,21 @@
 
                 <ul [ngClass]="{'toggled': isSectionOpen(section)}"
                     class="menu-toggle-list">
-                    <li *ngFor="let page of section.pages" class="list-style-w-points">
+                    <li *ngFor="let page of section.pages">
                         <button mat-button
                                 routerLink="{{page.state}}"
                                 routerLinkActive="background-color-accent"
-                                (click)="closeSidenav()"
-                                class="md-button-toggle">
-                            <mat-icon >{{page.icon}}</mat-icon>
+                                (click)="closeSidenav()" class="md-button-toggle">
+                            <mat-icon>{{page.icon}}</mat-icon>
                             {{page.name}}
                         </button>
                     </li>
                 </ul>
             </li>
-
-    </mat-sidenav>-->
-    <mat-sidenav #sidenav
-                 disableClose
-                 role="navigation"
-                 [fixedInViewport]='true'
-                 class="sidenav"
-                 class="mat-elevation-z1"
-                 opened mode = "side"
-    >
-        <li class="side-menu" *ngFor="let section of sections" class="list-style">
-            <div [ngClass]="{'background-color-accent': isSectionOpen(section)}" routerLinkActive="background-color-accent" >
-                <button mat-button
-                        type=button
-                        routerLink="{{section.state}}"
-                        *ngIf="section.type === 'link'"
-                        (click)="toggleSection(section)"
-                        class="md-button-toggle"
-                        fxLayout="row"
-                        fxLayoutAlign=" center"
-                        routerLinkActive="background-color-accent"
-                        fxFill
-                        style=" padding: 1em;
-                                height: 5%;
-                                margin: -22px;"
-                                >
-                    <mat-icon class="dif-list">{{section.icon}}</mat-icon>
-                    {{section.name | uppercase}}
-                </button>
-            </div >
-
-            <div [ngClass]="{'background-color-accent': isSectionOpen(section)}" routerLinkActive="background-color-accent">
-                <button mat-button
-                        *ngIf="section.type === 'toggle'"
-                        (click)="toggleSection(section)"
-                        [ngClass]="{'background-color-accent': isSectionOpen(section)}"
-                        class="md-button-toggle"
-                        routerLink="{{section.state}}"
-                        fxFill
-                        style=" padding: 1em;
-                            height: 5%;">
-                                <div fxLayout="row" fxLayoutAlign=" center">
-                                    <mat-icon class="dif-list">
-                                        {{section.icon}}
-                                    </mat-icon>
-                                    <div fxFlexOffset="5px">
-                                        {{section.name | uppercase}}
-                                    </div>
-                                    <mat-icon style="margin-left: 25%;"
-                                              class="md-toggle-icon"
-                                              [ngClass]="{'toggled': isSectionOpen(section)}">
-                                        keyboard_arrow_down
-                                    </mat-icon>
-                                </div>
-                </button>
-
-            </div>
-
-            <ul [ngClass]="{'toggled': isSectionOpen(section)}"
-                [ngClass]="{'toggled': toggleSection(section)}"
-                class="menu-toggle-list">
-                <li *ngFor="let page of section.pages" class="list-style-w-points">
-                       <button mat-button
-                            routerLink="{{page.state}}"
-                            routerLinkActive="background-color-accent"
-                            (click)="closeSidenav()"
-                            class="md-button-toggle"
-                            fxLayout="row"
-                            fxLayoutAlign=" center"
-                            fxFill
-                            >
-                        <mat-icon>{{page.icon}}</mat-icon>
-                        {{page.name}}
-                    </button>
-                    <div style="margin: 0 0 22px 0"></div>
-                </li>
-
-            </ul>
-        </li>
+        </ul>
 
     </mat-sidenav>
-
-
-    <mat-sidenav-content>
+    <mat-sidenav-content role="main">
         <router-outlet></router-outlet>
     </mat-sidenav-content>
-
 </mat-sidenav-container>

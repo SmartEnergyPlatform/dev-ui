@@ -1,20 +1,26 @@
 /*
- *  Copyright  2018 InfAI (CC SES)
  *
- * Licensed under the Apache License, Version 2.0 (the “License”); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+ *       2018 InfAI (CC SES)
  *
- *  http://www.apache.org/licenses/LICENSE-2.0
+ *     Licensed under the Apache License, Version 2.0 (the “License”);
+ *     you may not use this file except in compliance with the License.
+ *     You may obtain a copy of the License at
  *
- * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an “AS IS” BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+ *         http://www.apache.org/licenses/LICENSE-2.0
  *
- *
+ *     Unless required by applicable law or agreed to in writing, software
+ *     distributed under the License is distributed on an “AS IS” BASIS,
+ *     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *     See the License for the specific language governing permissions and
+ *     limitations under the License.
+ * /
  */
 
 import {AfterViewInit, Component, OnInit, Output, ViewChild} from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import {TranslateService} from '@ngx-translate/core';
 import { AuthService} from '../../../services/auth/auth.service';
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import {Router, ActivatedRoute, NavigationEnd, ActivatedRouteSnapshot} from '@angular/router';
 import { MatSidenav } from '@angular/material';
 import {filter, map, mergeMap, take} from 'rxjs/internal/operators';
 
@@ -68,6 +74,7 @@ export class SidenavComponent implements OnInit, AfterViewInit{
         this.showOrHideSidenav();
         this.getSections();
         this.getActiveSection();
+
     }
 
     ngAfterViewInit() {
@@ -176,9 +183,15 @@ export class SidenavComponent implements OnInit, AfterViewInit{
             filter((event) => event instanceof NavigationEnd),
             take(1),
             map(() => {
-                return this.activatedRoute.firstChild;
-            }),
-            mergeMap((activatedRoute: ActivatedRoute) => activatedRoute.url)
-        ).subscribe((activeRoute: any) => this.openSection = '/'  + activeRoute[0].path);
+                return this.activatedRoute.snapshot['_routerState'].url;
+            })
+        ).subscribe((activeRoute: string) => {
+            const index = activeRoute.lastIndexOf('/');
+            if (index > 0) {
+                this.openSection = activeRoute.substring(0, index);
+            } else {
+                this.openSection = activeRoute;
+            }
+        });
     }
 }
