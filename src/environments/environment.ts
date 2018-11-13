@@ -23,8 +23,8 @@
 
 export const environment = {
   production: false,
-  kong: "http://fgseitsrancher.wifa.intern.uni-leipzig.de:8000",
+  kong: "http://localhost:8000",
   client: "frontend",
-  keycloak: "https://auth.sepl.infai.org/auth",
+  keycloak: 'http://localhost:3000/auth',
   loginRequired: true
 };

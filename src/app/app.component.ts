@@ -16,7 +16,14 @@
  *
  */
 
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import { AuthService } from './services/auth/auth.service';
+import { ResponsiveService } from './core/services/responsive.service';
+import { ApiService } from './services/api/api.service';
+import { TranslateService } from '@ngx-translate/core';
+import { Dialog } from './dev-role-dialog/dialog.component';
+import { MatDialog} from '@angular/material';
+
 
 @Component({
   selector: 'app-root',
@@ -24,11 +31,34 @@ import {Component} from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
 
-  constructor(){
+    title = 'app';
+    userIsAdmin = false;
+    userIsDev = false;
 
-  }
+    constructor(
+        public dialog: MatDialog,
+        translate: TranslateService,
+        private authService: AuthService,
+        private responsiveService: ResponsiveService,
+        private apiService: ApiService) {
+
+        translate.setDefaultLang('en')
+
+        const userProfile = this.authService.getUserProfile()
+        if (userProfile) {
+            translate.use(userProfile["attributes"]["locale"][0]);
+        }
+
+    }
+
+    ngOnInit() {
+
+    }
 }
+
+
+
 
 

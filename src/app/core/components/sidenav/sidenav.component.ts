@@ -22,7 +22,7 @@ import {TranslateService} from '@ngx-translate/core';
 import { AuthService} from '../../../services/auth/auth.service';
 import {Router, ActivatedRoute, NavigationEnd, ActivatedRouteSnapshot} from '@angular/router';
 import { MatSidenav } from '@angular/material';
-import {filter, map, mergeMap, take} from 'rxjs/internal/operators';
+import {filter, map, mergeMap, take} from 'rxjs/operators';
 
 import {SidenavService} from './shared/sidenav.service';
 import {SidenavSectionModel} from './shared/sidenav-section.model';
@@ -63,7 +63,7 @@ export class SidenavComponent implements OnInit, AfterViewInit{
 
         var userProfile = this.authService.getUserProfile();
 
-        if(userProfile) {
+        if(userProfile && userProfile["attributes"] && userProfile["attributes"]["locale"]) {
             translate.use(userProfile["attributes"]["locale"][0]);
         }
 
