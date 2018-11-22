@@ -25,6 +25,6 @@ export const environment = {
   production: false,
   kong: "http://fgseitsrancher.wifa.intern.uni-leipzig.de:8000",
   client: "frontend",
-  keycloak: 'http://auth.sepl.infai.org/auth',
+  keycloak: 'https://auth.sepl.infai.org/auth',
   loginRequired: true
 };
