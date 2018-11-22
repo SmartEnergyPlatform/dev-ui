@@ -73,7 +73,7 @@ export class PermissionsAddComponent implements OnInit {
 
 
   showAll() {
-    this.router.navigate(["/list"])
+    this.router.navigate(["/permissions"])
   }
 
   ngOnInit() {}

@@ -170,6 +170,6 @@ export class PermissionsEditComponent implements OnInit {
     }
 
     showAll() {
-        this.router.navigate(["/list"])
+        this.router.navigate(["/permissions"])
     }
 }
