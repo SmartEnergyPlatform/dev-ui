@@ -113,6 +113,7 @@ export class PermissionsAddComponent implements OnInit {
       if (action["put"]) policy["Actions"].push("PUT")
 
       this.ladonService.postPolicy(policy).then(res => {
+        console.log(policy)
         this.submit_failed = res["Error"] != ""
       }, error => {
         this.submit_failed = true

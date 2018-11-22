@@ -39,6 +39,7 @@ import {
 import {
   AuthService
 } from '../../services/auth/auth.service';
+import {element} from 'protractor';
 
 @Component({
   selector: 'list',
@@ -75,8 +76,9 @@ export class PermissionsListComponent {
     this.router.navigate(["/permissions/add"])
   }
 
-  editPolicy() {
-      this.router.navigate(["/permissions/edit"])
+  editPolicy(policy) {
+      this.router.navigate(["/permissions/edit", {id: policy['id'], actions: policy['actions'], subject: policy['subject'], resource: policy['resource']}]
+      );
   }
 
     deletePolicy(policy) {

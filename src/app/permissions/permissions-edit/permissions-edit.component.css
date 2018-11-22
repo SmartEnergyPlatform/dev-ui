@@ -16,3 +16,27 @@
  *
  */
 
+admin {
+    width:60%;
+}
+
+mat-select {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.action_checkboxes {
+    display: flex;
+    justify-content: space-between;
+}
+
+mat-step:nth-child(1) buttton[matstepperprevious] {
+    visibility: hidden;
+}
+
+mat-step:nth-child(3) buttton[matsteppernext] {
+    visibility: hidden;
+}
+
+.rule {
+    margin-bottom:50px;
+}

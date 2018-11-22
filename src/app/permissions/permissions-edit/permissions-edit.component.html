@@ -15,6 +15,70 @@
   ~     limitations under the License.
   ~
   -->
-<div class="outer">
 
+<div class="outer">
+    <form [formGroup]="form">
+        <mat-horizontal-stepper>
+
+            <!--
+            <mat-step label="Subjekt">
+                <mat-select formControlName="subject" placeholder="Rolle">
+                    <mat-option *ngFor="let role of roles" [value]="role.name">{{role.name}}</mat-option>
+                </mat-select>
+                <div class="control_buttons">
+                    <button color="primary" mat-raised-button matStepperPrevious>Zurück</button>
+                    <button color="primary" mat-raised-button matStepperNext>Weiter</button>
+                </div>
+            </mat-step>
+            -->
+
+
+
+            <mat-step label="Regel">
+                <div class="rule" [formGroup]="form['controls'].actions['controls'][i]" *ngFor="let action of form['controls'].actions['controls']; let i=index">
+                    <div class="action_checkboxes">
+                        <mat-checkbox [(ngModel)] = "get"  formControlName="get">GET</mat-checkbox>
+                        <mat-checkbox [(ngModel)] = "post" formControlName="post">POST</mat-checkbox>
+                        <mat-checkbox [(ngModel)] = "patch" formControlName="patch">PATCH</mat-checkbox>
+                        <mat-checkbox [(ngModel)] = "delete" formControlName="delete">DELETE</mat-checkbox>
+                        <mat-checkbox [(ngModel)] = "put" formControlName="put">PUT</mat-checkbox>
+                    </div>
+
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="API Endpoint"/>
+                    </mat-form-field>
+
+                    <mat-select [(ngModel)]="resource" formControlName="endpoint" placeholder="Endpoint">
+                        <mat-option *ngFor="let uri of uris" [value]="uri">{{uri}}</mat-option>
+                    </mat-select>
+
+                </div>
+
+                <button (click)="addAction()" color="primary" mat-raised-button>Weitere Regel</button>
+
+
+                <div class="control_buttons">
+                    <button color="primary" mat-raised-button matStepperPrevious>Zurück</button>
+                    <button (click)="submit()" color="primary" type="submit" mat-raised-button matStepperNext>Absenden</button>
+                </div>
+            </mat-step>
+
+            <mat-step label="Ergebnis">
+                <div *ngIf="submit_failed">
+                    <p>Policy konnte nicht erfolgreich erstellt werden</p>
+                </div>
+                <div *ngIf="!submit_failed">
+                    <p>Policy wurde erfolgreich bearbeitet</p>
+                </div>
+                <div class="control_buttons">
+
+                    <button color="primary" mat-raised-button (click)="showAll()">Alle Regeln</button>
+
+                </div>
+            </mat-step>
+        </mat-horizontal-stepper>
+    </form>
+
+    <section>
+    </section>
 </div>

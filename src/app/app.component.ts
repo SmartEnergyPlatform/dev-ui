@@ -31,32 +31,57 @@ import { MatDialog} from '@angular/material';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit{
 
     title = 'app';
     userIsAdmin = false;
-    userIsDev = false;
+    userIsDev = false ;
 
     constructor(
         public dialog: MatDialog,
-        translate: TranslateService,
-        private authService: AuthService,
-        private responsiveService: ResponsiveService,
-        private apiService: ApiService) {
+      translate: TranslateService,
+      private authService: AuthService,
+      private responsiveService: ResponsiveService,
+      private apiService: ApiService){
 
-        translate.setDefaultLang('en')
+      translate.setDefaultLang('en')
 
-        const userProfile = this.authService.getUserProfile()
-        if (userProfile) {
-            translate.use(userProfile["attributes"]["locale"][0]);
-        }
+      const userProfile = this.authService.getUserProfile()
+      if(userProfile) {
+          translate.use(userProfile["attributes"]["locale"][0]);
+      }
 
+  }
+
+  ngOnInit(){
     }
 
-    ngOnInit() {
+/*  ngOnInit(){
+    this.responsiveService.observeMqAlias().subscribe((resp) => {console.log(resp)});
+    this.userIsAdmin = this.authService.userHasRole("admin")
+    this.userIsDev = this.authService.userHasRole("developer")
+    this.checkDeveloperRole();
 
-    }
 }
+
+    checkDeveloperRole() {
+        if(!this.userIsDev) {
+            // user does not have developer role but wants to use developer portal -> give him developer role
+            let dialogRef = this.dialog.open(Dialog, {
+                width: '450px'
+            });
+
+            dialogRef.afterClosed().subscribe(result => {
+                console.log('The dialog was closed');
+                this.apiService.patch("/role", "").then(result => {
+                    location.reload();
+                });
+
+            });
+        }
+    }*/
+}
+
 
 
 

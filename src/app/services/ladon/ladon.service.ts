@@ -38,11 +38,15 @@ export class LadonService {
   }
 
   deletePolicy(policy) {
-    return this.apiService.delete(this.baseUrl + "/policies?id=" + policy["id"])
+    return this.apiService.delete(this.baseUrl + "/policies?id=" + policy["id"]);
   }
 
   putPolicy(policy) {
-        return this.apiService.put(this.baseUrl + "/policies", policy)
+    return this.apiService.put(this.baseUrl + "/policies?id=" + policy["id"], policy);
     }
+
+  patchPolicy(policy) {
+      return this.apiService.patch(this.baseUrl + "/policies?id=" + policy["id"], policy);
+  }
 
 }

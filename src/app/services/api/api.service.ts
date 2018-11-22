@@ -64,7 +64,7 @@ export class ApiService {
           "Authorization": "Bearer " + token
          
         });
-        this.httpClient.post(this.platformUrl + path, payload, {'headers': headers}).subscribe(result => resolve(result))
+        this.httpClient.post(this.platformUrl + path, payload, {'headers': headers}).subscribe(result => resolve(result));
       })
     })
   }
@@ -76,7 +76,10 @@ export class ApiService {
           "Authorization": "Bearer " + token
          
         });
-        this.httpClient.put(this.platformUrl + path, payload, {'headers': headers}).subscribe(result => resolve(result))
+        this.httpClient.put(this.platformUrl + path, payload, {'headers': headers}).subscribe(result => {
+            resolve(result);
+        });
+
       }) 
     })
   }
@@ -88,7 +91,7 @@ export class ApiService {
           "Authorization": "Bearer " + token
          
         });
-        this.httpClient.delete(this.platformUrl  + path, {'headers': headers}).subscribe(result => resolve(result))
+        this.httpClient.delete(this.platformUrl  + path, {'headers': headers}).subscribe(result => resolve(result));
       })
     })
   }
