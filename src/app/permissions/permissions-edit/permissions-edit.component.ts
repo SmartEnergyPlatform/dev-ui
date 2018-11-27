@@ -24,6 +24,9 @@ import {KongService} from '../../services/kong/kong.service';
 import {LadonService} from '../../services/ladon/ladon.service';
 import {MatTableDataSource} from '@angular/material';
 import {Router} from '@angular/router';
+import {FormControl} from '@angular/forms';
+import {Observable} from 'rxjs';
+
 
 @Component({
   selector: 'app-permissions-edit',
@@ -31,6 +34,8 @@ import {Router} from '@angular/router';
   styleUrls: ['./permissions-edit.component.css']
 })
 export class PermissionsEditComponent implements OnInit {
+
+   myControl = new FormControl();
 
   subject: string;
   actions: string;
@@ -46,11 +51,12 @@ export class PermissionsEditComponent implements OnInit {
   delete = false;
   put = false;
 
-  // all roles and uris
+  // all roles and uris and users
   roles: any;
   uris: any;
+  users: any;
 
-  policies: any
+  policies: any;
 
   array_of_actions: string[];
 

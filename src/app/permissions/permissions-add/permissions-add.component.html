@@ -50,13 +50,23 @@
             <mat-checkbox formControlName="put">PUT</mat-checkbox>
           </div>
 
+
           <mat-form-field class="example-full-width">
+            <input type="text"  placeholder="Endpoint" aria-label="Number" matInput  [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let uri of uris"[value]="uri">
+                {{uri}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+
+         <!-- <mat-form-field class="example-full-width">
             <input matInput formControlName="endpoint" placeholder="API Endpoint"/>
           </mat-form-field>
 
           <mat-select formControlName="endpoint" placeholder="Endpoint">
               <mat-option *ngFor="let uri of uris" [value]="uri">{{uri}}</mat-option>
-            </mat-select>
+            </mat-select>-->
 
         </div>
 

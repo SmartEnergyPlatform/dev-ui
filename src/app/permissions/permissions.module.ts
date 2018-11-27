@@ -23,9 +23,7 @@ import { PermissionsListComponent } from './permissions-list/permissions-list.co
 import { RouterModule, Routes } from '@angular/router';
 import { ValidTokenGuard } from '../services/auth/guard.service';
 import { FormsModule } from '@angular/forms';
-import {
-  ReactiveFormsModule
-} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { PermissionsEditComponent } from './permissions-edit/permissions-edit.component';
