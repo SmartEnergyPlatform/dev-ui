@@ -76,6 +76,7 @@ export class PermissionsEditComponent implements OnInit {
 
   ngOnInit() {
       this.userManagementService.loadRoles().then(roles => this.roles = roles);
+      this.userManagementService.loadUsers().then(users => this.users = users);
 
       this.uris = this.kongService.loadUris()
 
