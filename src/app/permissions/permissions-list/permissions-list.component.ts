@@ -81,7 +81,7 @@ export class PermissionsListComponent {
       );
   }
 
-    deletePolicy(policy) {
+  deletePolicy(policy) {
     console.log("delete policy " + policy["id"])
     this.ladonService.deletePolicy(policy).then(response => {
       console.log(response)

@@ -38,7 +38,7 @@ export class AppComponent implements OnInit{
     userIsDev = false ;
 
     constructor(
-        public dialog: MatDialog,
+      public dialog: MatDialog,
       translate: TranslateService,
       private authService: AuthService,
       private responsiveService: ResponsiveService,
@@ -53,16 +53,15 @@ export class AppComponent implements OnInit{
 
   }
 
-  ngOnInit(){
-    }
 
-/*  ngOnInit(){
-    this.responsiveService.observeMqAlias().subscribe((resp) => {console.log(resp)});
+
+    ngOnInit(){
+    this.responsiveService.observeMqAlias().subscribe((resp) => {});
     this.userIsAdmin = this.authService.userHasRole("admin")
     this.userIsDev = this.authService.userHasRole("developer")
     this.checkDeveloperRole();
 
-}
+    }
 
     checkDeveloperRole() {
         if(!this.userIsDev) {
@@ -79,7 +78,7 @@ export class AppComponent implements OnInit{
 
             });
         }
-    }*/
+    }
 }
 
 

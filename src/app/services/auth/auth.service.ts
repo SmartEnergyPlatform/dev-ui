@@ -76,7 +76,7 @@ export class AuthService {
     if (!environment.loginRequired) {
       return true
     }
-    return AuthService.auth.authz.hasRealmRole(role)
+    return AuthService.auth.authz.hasRealmRole(role);
   }
 
   getUserProfile() {
