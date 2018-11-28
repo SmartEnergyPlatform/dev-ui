@@ -16,7 +16,7 @@
   ~
   -->
 
-<div class="outer">
+<div *ngIf="userIsAdmin" class="outer">
   <form [formGroup]="form">
 
     <mat-horizontal-stepper>

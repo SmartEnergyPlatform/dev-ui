@@ -25,7 +25,9 @@ import {LadonService} from '../../services/ladon/ladon.service';
 import {MatTableDataSource} from '@angular/material';
 import {Router} from '@angular/router';
 import {FormControl} from '@angular/forms';
+import { AuthService } from '../../services/auth/auth.service';
 import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 
 
 @Component({
@@ -35,7 +37,10 @@ import {Observable} from 'rxjs';
 })
 export class PermissionsEditComponent implements OnInit {
 
-   myControl = new FormControl();
+  myControl = new FormControl();
+
+  userIsAdmin: false;
+
 
   subject: string;
   actions: string;
@@ -55,10 +60,14 @@ export class PermissionsEditComponent implements OnInit {
   roles: any;
   uris: any;
   users: any;
-
   policies: any;
 
-  array_of_actions: string[];
+  // options for autocomplete filter
+  options: string[] = this.uris;
+  filteredOptions: Observable<string[]>;
+
+
+    array_of_actions: string[];
 
     public form = this.fb.group({
       subject: ["", Validators.pattern("\w+")],
@@ -71,10 +80,14 @@ export class PermissionsEditComponent implements OnInit {
       private userManagementService: UserManagementService,
       private route: ActivatedRoute,
       private ladonService: LadonService,
-      private router: Router){
+      private router: Router,
+      private authService: AuthService){
   }
 
   ngOnInit() {
+      this.userIsAdmin = this.authService.userHasRole("admin");
+
+
       this.userManagementService.loadRoles().then(roles => this.roles = roles);
       this.userManagementService.loadUsers().then(users => this.users = users);
 
@@ -87,6 +100,17 @@ export class PermissionsEditComponent implements OnInit {
 
       this.addAction();
       this.checkactiveActions();
+
+      // autocomplete filter
+
+      console.log(this.options);
+
+
+      this.filteredOptions = this.myControl.valueChanges
+          .pipe(
+              startWith(''),
+              map(value => this._filter(value))
+          );
 
   }
 
@@ -178,5 +202,12 @@ export class PermissionsEditComponent implements OnInit {
 
     showAll() {
         this.router.navigate(["/permissions"])
+    }
+
+    // autocomplete filter
+    private _filter(value: string): string[] {
+        const filterValue = value.toLowerCase();
+
+        return this.options.filter(option => option.toLowerCase().includes(filterValue));
     }
 }

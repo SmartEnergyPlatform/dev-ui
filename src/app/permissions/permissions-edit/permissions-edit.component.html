@@ -16,7 +16,7 @@
   ~
   -->
 
-<div class="outer">
+<div *ngIf="userIsAdmin" class="outer">
     <form [formGroup]="form">
         <mat-horizontal-stepper>
             <mat-step label="Subjekt">
@@ -49,8 +49,8 @@
                     <mat-form-field class="example-full-width">
                         <input type="text" [(ngModel)]="resource" placeholder="Endpoint" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
                         <mat-autocomplete #auto="matAutocomplete">
-                            <mat-option *ngFor="let uri of uris"[value]="uri">
-                                {{uri}}
+                            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                {{option}}
                             </mat-option>
                         </mat-autocomplete>
                     </mat-form-field>

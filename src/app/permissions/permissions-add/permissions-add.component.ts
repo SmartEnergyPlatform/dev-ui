@@ -50,7 +50,10 @@ export class PermissionsAddComponent implements OnInit {
   uris: any 
   submit_failed: any = false
 
-  public form = this.fb.group({
+  userIsAdmin: false;
+
+
+    public form = this.fb.group({
     subject: ["", Validators.pattern("\w+")],
     actions: this.fb.array([])
   });
@@ -62,7 +65,10 @@ export class PermissionsAddComponent implements OnInit {
               private router: Router,
               private userManagementService: UserManagementService) {
 
-    this.userManagementService.loadUsers().then(users => this.users = users)
+    this.userIsAdmin = this.authService.userHasRole("admin");
+
+
+      this.userManagementService.loadUsers().then(users => this.users = users)
 
     this.userManagementService.loadRoles().then(roles => this.roles = roles)
 
