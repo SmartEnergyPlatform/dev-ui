@@ -33,11 +33,13 @@ import {
   Router
 } from '@angular/router';
 import {
-  FormBuilder,
-  Validators,
-  FormArray
+    FormBuilder,
+    Validators,
+    FormArray, FormControl
 } from '@angular/forms';
 import { KongService } from '../../services/kong/kong.service';
+import {map, startWith} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-admin',
@@ -52,11 +54,16 @@ export class PermissionsAddComponent implements OnInit {
 
   userIsAdmin: false;
 
+  myControl = new FormControl();
+
 
     public form = this.fb.group({
     subject: ["", Validators.pattern("\w+")],
     actions: this.fb.array([])
   });
+
+  // options for autocomplete filter
+  filteredOptions: Observable<string[]>;
 
   constructor(private kongService: KongService,
               private ladonService: LadonService,
@@ -96,6 +103,13 @@ export class PermissionsAddComponent implements OnInit {
     });
 
     control.push(addrCtrl);
+
+    // autocomplete filter
+    this.filteredOptions = this.myControl.valueChanges
+        .pipe(
+            startWith(''),
+            map(value => this._filter(value))
+        );
   }
 
 
@@ -126,5 +140,11 @@ export class PermissionsAddComponent implements OnInit {
       })
     });
   }
+    // autocomplete filter
+    private _filter(value: string): string[] {
+        const filterValue = value.toLowerCase();
+
+        return this.uris.filter(option => option.toLowerCase().includes(filterValue));
+    }
 
 }

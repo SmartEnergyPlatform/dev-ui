@@ -63,7 +63,6 @@ export class PermissionsEditComponent implements OnInit {
   policies: any;
 
   // options for autocomplete filter
-  options: string[] = this.uris;
   filteredOptions: Observable<string[]>;
 
 
@@ -102,10 +101,6 @@ export class PermissionsEditComponent implements OnInit {
       this.checkactiveActions();
 
       // autocomplete filter
-
-      console.log(this.options);
-
-
       this.filteredOptions = this.myControl.valueChanges
           .pipe(
               startWith(''),
@@ -208,6 +203,6 @@ export class PermissionsEditComponent implements OnInit {
     private _filter(value: string): string[] {
         const filterValue = value.toLowerCase();
 
-        return this.options.filter(option => option.toLowerCase().includes(filterValue));
+        return this.uris.filter(option => option.toLowerCase().includes(filterValue));
     }
 }
