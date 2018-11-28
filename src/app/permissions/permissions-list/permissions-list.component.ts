@@ -48,10 +48,13 @@ import {element} from 'protractor';
 })
 export class PermissionsListComponent {
   displayedColumns = ['subject', 'actions', 'resource', 'delete', 'edit'];
-  policies: any
+  policies: any;
+  userIsAdmin: false;
 
   constructor(private authService: AuthService, private ladonService: LadonService, private router: Router) {
-    this.loadPolicies()
+    this.loadPolicies();
+    this.userIsAdmin = this.authService.userHasRole("admin");
+
   }
 
 

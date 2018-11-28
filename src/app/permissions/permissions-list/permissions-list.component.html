@@ -16,7 +16,7 @@
   ~
   -->
 
-<section class="outer">
+<section *ngIf="userIsAdmin" class="outer">
   <mat-table #table [dataSource]="policies">
       <!-- Name Column -->
       <ng-container matColumnDef="subject">
