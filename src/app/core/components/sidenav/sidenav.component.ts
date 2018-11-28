@@ -67,7 +67,7 @@ export class SidenavComponent implements OnInit, AfterViewInit{
             translate.use(userProfile["attributes"]["locale"][0]);
         }
 
-        this.userIsAdmin = this.authService.userHasRole("admin")
+        this.userIsAdmin = this.authService.userHasRole("admin");
     }
 
     ngOnInit() {
@@ -139,6 +139,12 @@ export class SidenavComponent implements OnInit, AfterViewInit{
 
     private getSections(): void {
         this.sections = this.sidenavService.getSections();
+
+        // delete permissions if user is not admin
+        if (!this.userIsAdmin){
+            const index = this.sections.findIndex(x => x.name === 'Permissions');
+            this.sections.splice(index, 1);
+        }
     }
 
 
