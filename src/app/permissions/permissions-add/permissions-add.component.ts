@@ -53,8 +53,10 @@ export class PermissionsAddComponent implements OnInit {
   submit_failed: any = false
 
   userIsAdmin: false;
+  resource: string;
 
-  myControl = new FormControl();
+
+    myControl = new FormControl();
 
 
     public form = this.fb.group({
@@ -121,7 +123,7 @@ export class PermissionsAddComponent implements OnInit {
       var policy = {
         "Subjects": [form_value["subject"]],
         "Actions": [],
-        "Resources": ["<^(endpoints" + action["endpoint"].replace(/\//g, ":") + ").*>"],
+        "Resources": ["<^(endpoints:" + this.resource.substring(1) + ").*>"],
         "Effect": "allow",
         "ID": form_value["subject"] + "-" + action["endpoint"]
       }
