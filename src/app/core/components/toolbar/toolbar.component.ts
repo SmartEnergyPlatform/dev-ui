@@ -16,14 +16,17 @@
  *
  */
 
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, Output, ViewChild} from '@angular/core';
 import {forkJoin} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {SwaggerService} from '../../../services/swagger/swagger.service';
 import { AuthService } from '../../../services/auth/auth.service';
 import {ResponsiveService} from '../../services/responsive.service';
 import {SidenavService} from '../sidenav/shared/sidenav.service';
-import { Router  } from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {SidenavSectionModel} from '../sidenav/shared/sidenav-section.model';
+import {filter, map, take} from 'rxjs/operators';
+import {MatSidenav} from '@angular/material';
 
 
 
@@ -32,7 +35,13 @@ import { Router  } from '@angular/router';
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.css']
 })
-export class ToolbarComponent implements OnInit {
+export class ToolbarComponent implements OnInit, AfterViewInit{
+
+    @ViewChild('sidenav') sidenav!: MatSidenav;
+    @Output() sections: SidenavSectionModel[] = [];
+    @Output() openSection: null | string = null;
+    @Output() zIndex = -1;
+
 
     inputFocused: boolean = false;
     searchQuery: string;
@@ -50,11 +59,17 @@ export class ToolbarComponent implements OnInit {
                 private authService: AuthService,
                 private responsiveService: ResponsiveService,
                 private sidenavService: SidenavService,
-                private router: Router,) { }
+                private router: Router,
+                private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
       this.userIsAdmin = this.authService.userHasRole("admin")
-  }
+      this.getSections();
+      this.getActiveSection();
+    }
+
+    ngAfterViewInit() {
+    }
 
     search() {
         if (this.searchQuery == "") {
@@ -167,5 +182,38 @@ export class ToolbarComponent implements OnInit {
     logout() {
         this.authService.logout()
     }
+
+    private getActiveSection() {
+        this.router.events.pipe(
+            filter((event) => event instanceof NavigationEnd),
+            take(1),
+            map(() => {
+                return this.activatedRoute.snapshot['_routerState'].url;
+            })
+        ).subscribe((activeRoute: string) => {
+            const index = activeRoute.lastIndexOf('/');
+            if (index > 0) {
+                this.openSection = activeRoute.substring(0, index);
+            } else {
+                this.openSection = activeRoute;
+            }
+        });
+    }
+
+    private getSections(): void {
+        this.sections = this.sidenavService.getSections();
+
+        // delete permissions if user is not admin
+        if (!this.userIsAdmin){
+            const index = this.sections.findIndex(x => x.name === 'Permissions');
+            this.sections.splice(index, 1);
+        }
+    }
+
+    toggleSection(section: SidenavSectionModel): void {
+        this.openSection = (this.openSection === section.state ? null : section.state);
+
+    }
+
 
 }
