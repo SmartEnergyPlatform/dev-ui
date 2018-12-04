@@ -64,8 +64,6 @@ export class ToolbarComponent implements OnInit, AfterViewInit{
 
   ngOnInit() {
       this.userIsAdmin = this.authService.userHasRole("admin")
-      this.getSections();
-      this.getActiveSection();
     }
 
     ngAfterViewInit() {
@@ -182,38 +180,5 @@ export class ToolbarComponent implements OnInit, AfterViewInit{
     logout() {
         this.authService.logout()
     }
-
-    private getActiveSection() {
-        this.router.events.pipe(
-            filter((event) => event instanceof NavigationEnd),
-            take(1),
-            map(() => {
-                return this.activatedRoute.snapshot['_routerState'].url;
-            })
-        ).subscribe((activeRoute: string) => {
-            const index = activeRoute.lastIndexOf('/');
-            if (index > 0) {
-                this.openSection = activeRoute.substring(0, index);
-            } else {
-                this.openSection = activeRoute;
-            }
-        });
-    }
-
-    private getSections(): void {
-        this.sections = this.sidenavService.getSections();
-
-        // delete permissions if user is not admin
-        if (!this.userIsAdmin){
-            const index = this.sections.findIndex(x => x.name === 'Permissions');
-            this.sections.splice(index, 1);
-        }
-    }
-
-    toggleSection(section: SidenavSectionModel): void {
-        this.openSection = (this.openSection === section.state ? null : section.state);
-
-    }
-
 
 }

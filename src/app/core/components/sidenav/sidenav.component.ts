@@ -195,7 +195,6 @@ export class SidenavComponent implements OnInit, AfterViewInit{
                 return this.activatedRoute.snapshot['_routerState'].url;
             })
         ).subscribe((activeRoute: string) => {
-            console.log(activeRoute)
             const index = activeRoute.lastIndexOf('/');
             if (index > 0) {
                 this.openSection = activeRoute.substring(0, index);
@@ -205,14 +204,15 @@ export class SidenavComponent implements OnInit, AfterViewInit{
         });
     }
 
-
     private detectRouterChange() {
         this.router.events.subscribe(event => {
             if (event instanceof NavigationEnd) {
                 const url = event['url'];
                 if ( url !== '/') {
                     const section = this.sections.find(i => i.state === url);
-                    this.toggleSection(section);
+                    if (typeof section !== 'undefined') {
+                        this.toggleSection(section);
+                    }
                 }
             }
         });

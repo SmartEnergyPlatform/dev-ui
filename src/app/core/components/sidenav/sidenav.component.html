@@ -39,7 +39,7 @@
 
                 <button mat-button
                         *ngIf="section.type === 'toggle'"
-                        (click)="toggleSection(section)"
+                        [ngClass]="{'background-color-accent': isSectionOpen(section)}"
                         routerLink="{{section.state}}"
                         routerLinkActive="background-color-accent"
                         class="md-button-toggle">
