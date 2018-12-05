@@ -31,7 +31,8 @@ import {
   Router
 } from '@angular/router';
 import {
-  MatTableDataSource
+    MatDialog,
+    MatTableDataSource
 } from '@angular/material';
 import {
   LadonService
@@ -40,6 +41,7 @@ import {
   AuthService
 } from '../../services/auth/auth.service';
 import {Sort} from '@angular/material';
+import { PermissionsDialogDeleteComponent} from '../permissions-dialog-delete/permissions-dialog-delete.component';
 
 @Component({
   selector: 'list',
@@ -57,7 +59,9 @@ export class PermissionsListComponent implements OnInit {
 
     constructor(private authService: AuthService,
                 private ladonService: LadonService,
-                private router: Router) {
+                private router: Router,
+                public dialog: MatDialog,
+    ) {
     }
 
     ngOnInit() {
@@ -68,24 +72,23 @@ export class PermissionsListComponent implements OnInit {
 
     loadPolicies() {
         this.ladonService.getAllPolicies().then(response => {
-        this.policies = (<any>response).map(policy => {
-        policy["subject"] = policy["subjects"][0]
-        if (policy["resources"][0] == "<.*>") {
-          policy["resource"] = policy["resources"][0]
-        } else {
-          policy["resource"] = policy["resources"][0].split("(")[1].split(")")[0].replace(/:/g, "/").replace("endpoints", "")
-        }
-        policy["actions"] = policy["actions"].toString()
-        return policy
-    })
+            this.policies = (<any>response).map(policy => {
+                policy["subject"] = policy["subjects"][0]
+                if (policy["resources"][0] == "<.*>") {
+                  policy["resource"] = policy["resources"][0]
+                } else {
+                  policy["resource"] = policy["resources"][0].split("(")[1].split(")")[0].replace(/:/g, "/").replace("endpoints", "")
+                }
+                policy["actions"] = policy["actions"].toString()
+                return policy
+            })
 
-        // for sorting algorithm
-        this.sortedData = this.policies.slice();
+            // for sorting algorithm
+            this.sortedData = this.policies.slice();
 
-        // data for mata table
-        this.mat_policies = new MatTableDataSource(this.sortedData);
-    })
-
+            // data for mata table
+            this.mat_policies = new MatTableDataSource(this.sortedData);
+        });
     }
 
   createPolicy() {
@@ -93,21 +96,21 @@ export class PermissionsListComponent implements OnInit {
   }
 
   editPolicy(policy) {
-      this.router.navigate(["/permissions/edit", {id: policy['id'], actions: policy['actions'], subject: policy['subject'], resource: policy['resource']}]
+      this.router.navigate(["/permissions/edit",
+          {id: policy['id'], actions: policy['actions'], subject: policy['subject'], resource: policy['resource']}]
       );
   }
 
   deletePolicy(policy) {
-    console.log("delete policy " + policy["id"])
+    // console.log("delete policy " + policy["id"])
     this.ladonService.deletePolicy(policy).then(response => {
-      console.log(response)
+      // console.log(response)
       this.loadPolicies()
     })
   }
 
     sortData(sort: Sort) {
         const data = this.policies.slice();
-
 
         if (!sort.active || sort.direction === '') {
             this.sortedData = data;
@@ -123,6 +126,20 @@ export class PermissionsListComponent implements OnInit {
                 default: return 0;
             }
         });
+    }
+
+    askfordelete(policy) {
+            // user does not have developer role but wants to use developer portal -> give him developer role
+            const dialogRef = this.dialog.open(PermissionsDialogDeleteComponent, {
+                width: '450px'
+            });
+
+            dialogRef.afterClosed().subscribe(result => {
+                if (result === 'yes') {
+                    console.log('The dialog was closed');
+                    this.deletePolicy(policy);
+                }
+            });
     }
 }
 

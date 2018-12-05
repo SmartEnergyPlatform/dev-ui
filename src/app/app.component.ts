@@ -66,7 +66,7 @@ export class AppComponent implements OnInit{
     checkDeveloperRole() {
         if(!this.userIsDev) {
             // user does not have developer role but wants to use developer portal -> give him developer role
-            let dialogRef = this.dialog.open(Dialog, {
+            const dialogRef = this.dialog.open(Dialog, {
                 width: '450px'
             });
 

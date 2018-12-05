@@ -38,14 +38,14 @@
       </ng-container>
 
       <ng-container matColumnDef="delete">
-          <mat-header-cell mat-sort-header="delete" *matHeaderCellDef> Delete </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>
           <mat-cell *matCellDef="let element">
-              <button (click)="deletePolicy(element)"><i class="material-icons" >delete</i></button>
+              <button (click)="askfordelete(element)"><i class="material-icons" >delete</i></button>
           </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="edit">
-          <mat-header-cell mat-sort-header="edit" *matHeaderCellDef> Edit </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> Edit </mat-header-cell>
           <mat-cell *matCellDef="let element">
               <button (click)="editPolicy(element)"><i class="material-icons" >edit</i></button>
           </mat-cell>

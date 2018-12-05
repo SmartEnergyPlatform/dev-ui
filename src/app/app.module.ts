@@ -49,6 +49,7 @@ import { AppComponent } from './app.component';
 import { Dialog } from './dev-role-dialog/dialog.component';
 import { StartComponent } from './start/start.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import {PermissionsDialogDeleteComponent} from './permissions/permissions-dialog-delete/permissions-dialog-delete.component';
 
 
 
@@ -95,7 +96,7 @@ const appRoutes: Routes = [
     }),
     BrowserAnimationsModule
   ],
-  entryComponents: [Dialog],
+  entryComponents: [Dialog, PermissionsDialogDeleteComponent],
   providers: [ApiService, AuthService, ValidTokenGuard, SwaggerService, LadonService, UserManagementService, DeviceSimService],
   bootstrap: [AppComponent]
 })
