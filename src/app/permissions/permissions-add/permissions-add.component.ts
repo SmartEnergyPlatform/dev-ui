@@ -55,43 +55,49 @@ export class PermissionsAddComponent implements OnInit {
   userIsAdmin: false;
   resource: string;
 
+  myControl = new FormControl();
 
-    myControl = new FormControl();
 
-
-    public form = this.fb.group({
-    subject: ["", Validators.pattern("\w+")],
-    actions: this.fb.array([])
+  public form = this.fb.group({
+  subject: ["", Validators.pattern("\w+")],
+  actions: this.fb.array([])
   });
 
   // options for autocomplete filter
   filteredOptions: Observable<string[]>;
 
+  public btnDisable: boolean;
+
+
+
   constructor(private kongService: KongService,
-              private ladonService: LadonService,
-              private fb: FormBuilder,
-              private authService: AuthService,
-              private router: Router,
-              private userManagementService: UserManagementService) {
+            private ladonService: LadonService,
+            private fb: FormBuilder,
+            private authService: AuthService,
+            private router: Router,
+            private userManagementService: UserManagementService,
+            private formBuilder: FormBuilder) {
 
-    this.userIsAdmin = this.authService.userHasRole("admin");
+  this.userIsAdmin = this.authService.userHasRole("admin");
 
 
-      this.userManagementService.loadUsers().then(users => this.users = users)
+  this.userManagementService.loadUsers().then(users => this.users = users)
 
-    this.userManagementService.loadRoles().then(roles => this.roles = roles)
+  this.userManagementService.loadRoles().then(roles => this.roles = roles)
 
-    this.uris = this.kongService.loadUris()
+  this.uris = this.kongService.loadUris()
 
-    this.addAction()
+  this.addAction();
+
+  this.btnDisable = false;
   }
-
 
   showAll() {
     this.router.navigate(["/permissions"])
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   addAction() {
     var control = < FormArray > this.form.controls['actions'];
@@ -149,4 +155,12 @@ export class PermissionsAddComponent implements OnInit {
         return this.uris.filter(option => option.toLowerCase().includes(filterValue));
     }
 
+
+    onChange(event) {
+      if (event === 'subject') {
+          this.btnDisable = false;
+      } else {
+          this.btnDisable = true;
+      }
+    }
 }

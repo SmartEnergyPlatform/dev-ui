@@ -65,13 +65,15 @@ export class PermissionsEditComponent implements OnInit {
   // options for autocomplete filter
   filteredOptions: Observable<string[]>;
 
+  public btnDisable: boolean;
 
-    array_of_actions: string[];
+
+  array_of_actions: string[];
 
     public form = this.fb.group({
       subject: ["", Validators.pattern("\w+")],
       actions: this.fb.array([])
-  });
+    });
 
   constructor(
       private kongService: KongService,
@@ -106,6 +108,9 @@ export class PermissionsEditComponent implements OnInit {
               startWith(''),
               map(value => this._filter(value))
           );
+
+      this.btnDisable = false;
+
 
   }
 
@@ -204,5 +209,13 @@ export class PermissionsEditComponent implements OnInit {
         const filterValue = value.toLowerCase();
 
         return this.uris.filter(option => option.toLowerCase().includes(filterValue));
+    }
+
+    onChange(event) {
+        if (event === 'subject') {
+            this.btnDisable = false;
+        } else {
+            this.btnDisable = true;
+        }
     }
 }

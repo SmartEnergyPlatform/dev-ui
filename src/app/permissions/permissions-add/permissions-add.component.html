@@ -20,12 +20,24 @@
   <form [formGroup]="form">
     <mat-horizontal-stepper>
       <mat-step label="Subjekt">
-        <mat-select formControlName="subject" placeholder="User">
-          <mat-option *ngFor="let user of users" [value]="user.username">{{user.username}}</mat-option>
-        </mat-select>
-        <mat-select formControlName="subject" placeholder="Rolle">
-          <mat-option *ngFor="let role of roles" [value]="role.name">{{role.name}}</mat-option>
-        </mat-select>
+        <mat-form-field>
+          <mat-select formControlName="subject" placeholder="User" [disabled]=btnDisable (click)="onChange('subject')">
+            <mat-option *ngFor="let user of users" [value]="user.username">
+              <div *ngIf="!btnDisable">
+                {{user.username}}
+              </div>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select formControlName="subject" placeholder="Rolle" [disabled]=!btnDisable (click)="onChange('role')">
+              <mat-option *ngFor="let role of roles" [value]="role.name">
+                <div *ngIf="btnDisable">
+                  {{role.name}}
+                </div>
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
         <div class="control_buttons">
           <button color="primary" mat-raised-button matStepperPrevious>Zurück</button>
           <button color="primary" mat-raised-button matStepperNext>Weiter</button>
