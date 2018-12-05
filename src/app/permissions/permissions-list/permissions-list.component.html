@@ -17,42 +17,43 @@
   -->
 
 <section *ngIf="userIsAdmin" class="outer">
-  <mat-table #table [dataSource]="policies">
+  <mat-table matSort #table (matSortChange)="sortData($event)" [dataSource]="sortedData">
+
       <!-- Name Column -->
       <ng-container matColumnDef="subject">
-        <mat-header-cell *matHeaderCellDef> Subject </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.subject}} </mat-cell>
+          <mat-header-cell mat-sort-header="subject" *matHeaderCellDef>Subject</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.subject}}</mat-cell>
       </ng-container>
 
       <!-- Weight Column -->
       <ng-container matColumnDef="actions">
-        <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.actions}} </mat-cell>
+          <mat-header-cell mat-sort-header="actions" *matHeaderCellDef>Actions</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.actions}}</mat-cell>
       </ng-container>
 
-      <!-- Symbol Column -->
+      <!-- Name Column -->
       <ng-container matColumnDef="resource">
-        <mat-header-cell *matHeaderCellDef> Resource </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.resource}} </mat-cell>
+          <mat-header-cell mat-sort-header="resource" *matHeaderCellDef>Resource</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.resource}}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="delete">
-        <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          <button (click)="deletePolicy(element)"><i class="material-icons" >delete</i></button>
-        </mat-cell>
+          <mat-header-cell mat-sort-header="delete" *matHeaderCellDef> Delete </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+              <button (click)="deletePolicy(element)"><i class="material-icons" >delete</i></button>
+          </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="edit">
-          <mat-header-cell *matHeaderCellDef> Edit </mat-header-cell>
+          <mat-header-cell mat-sort-header="edit" *matHeaderCellDef> Edit </mat-header-cell>
           <mat-cell *matCellDef="let element">
               <button (click)="editPolicy(element)"><i class="material-icons" >edit</i></button>
           </mat-cell>
       </ng-container>
 
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;">
-      </mat-row>
+      <mat-header-row mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row mat-row *matRowDef="let row; columns: displayedColumns;"> </mat-row>
+
     </mat-table>
     <button color="primary" mat-raised-button style="width: 100%; margin-bottom: 5%;" (click)="createPolicy()">Policy erstellen</button>
 </section>

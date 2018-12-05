@@ -17,7 +17,7 @@
  */
 
 import {
-  Component
+    Component, OnInit, AfterViewInit
 } from '@angular/core';
 import {
   DatePipe
@@ -39,28 +39,36 @@ import {
 import {
   AuthService
 } from '../../services/auth/auth.service';
-import {element} from 'protractor';
+import {Sort} from '@angular/material';
 
 @Component({
   selector: 'list',
   templateUrl: './permissions-list.component.html',
   styleUrls: ['./permissions-list.component.css']
 })
-export class PermissionsListComponent {
+export class PermissionsListComponent implements OnInit {
   displayedColumns = ['subject', 'actions', 'resource', 'delete', 'edit'];
   policies: any;
   userIsAdmin: false;
 
-  constructor(private authService: AuthService, private ladonService: LadonService, private router: Router) {
-    this.loadPolicies();
-    this.userIsAdmin = this.authService.userHasRole("admin");
-
-  }
+  sortedData: any[];
+  mat_policies: any;
 
 
-  loadPolicies() {
-    this.ladonService.getAllPolicies().then(response => {
-      this.policies = (<any>response).map(policy => {
+    constructor(private authService: AuthService,
+                private ladonService: LadonService,
+                private router: Router) {
+    }
+
+    ngOnInit() {
+        this.loadPolicies();
+        this.userIsAdmin = this.authService.userHasRole("admin");
+    }
+
+
+    loadPolicies() {
+        this.ladonService.getAllPolicies().then(response => {
+        this.policies = (<any>response).map(policy => {
         policy["subject"] = policy["subjects"][0]
         if (policy["resources"][0] == "<.*>") {
           policy["resource"] = policy["resources"][0]
@@ -69,11 +77,16 @@ export class PermissionsListComponent {
         }
         policy["actions"] = policy["actions"].toString()
         return policy
-      })
-
-      this.policies = new MatTableDataSource(this.policies)
     })
-  }
+
+        // for sorting algorithm
+        this.sortedData = this.policies.slice();
+
+        // data for mata table
+        this.mat_policies = new MatTableDataSource(this.sortedData);
+    })
+
+    }
 
   createPolicy() {
     this.router.navigate(["/permissions/add"])
@@ -92,4 +105,27 @@ export class PermissionsListComponent {
     })
   }
 
+    sortData(sort: Sort) {
+        const data = this.policies.slice();
+
+
+        if (!sort.active || sort.direction === '') {
+            this.sortedData = data;
+            return;
+        }
+        this.sortedData = data.sort((a, b) => {
+            const isAsc = sort.direction === 'asc';
+            switch (sort.active) {
+                case 'subject': return compare(a.subject, b.subject, isAsc);
+                case 'actions': return compare(a.actions, b.actions, isAsc);
+                case 'resource': return compare(a.resource, b.resource, isAsc);
+
+                default: return 0;
+            }
+        });
+    }
+}
+
+function compare(a: number | string, b: number | string, isAsc: boolean) {
+    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
