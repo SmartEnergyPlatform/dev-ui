@@ -60,7 +60,7 @@ $mat-green: (
   )
 );
 $candy-app-primary: mat-palette($mat-green, A200);
-$candy-app-accent:  mat-palette($mat-pink, A200, A100, A400);
+$candy-app-accent:  mat-palette($mat-green, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
 $candy-app-warn:    mat-palette($mat-red);
@@ -78,11 +78,11 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-
 
 /* generated: http://mcg.mbitson.com/#!?customcolor=%232e7d32&themename=mcgtheme */
 
-$my-app-primary: mat-palette($mat-green);
-$my-app-accent:  mat-palette($mat-green, 500, 900, A100);
+$my-app-primary: mat-palette($mat-green, A200);
+$my-app-accent:  mat-palette($mat-green, 800, A200);
 $my-app-warn:    mat-palette($mat-green);
 
-$my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
+$my-app-theme: mat-light-theme($candy-app-primary, $my-app-accent, $candy-app-warn);
 
 @include angular-material-theme($my-app-theme);
 
