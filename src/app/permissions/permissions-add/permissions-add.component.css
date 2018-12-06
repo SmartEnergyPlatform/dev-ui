@@ -40,3 +40,8 @@ mat-step:nth-child(3) buttton[matsteppernext] {
 .rule {
     margin-bottom:50px;
 }
+
+.mat-raised-button,
+.control_buttons{
+    color: white;
+}
