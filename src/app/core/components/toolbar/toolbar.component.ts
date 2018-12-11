@@ -23,7 +23,7 @@ import {SwaggerService} from '../../../services/swagger/swagger.service';
 import { AuthService } from '../../../services/auth/auth.service';
 import {ResponsiveService} from '../../services/responsive.service';
 import {SidenavService} from '../sidenav/shared/sidenav.service';
-import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Router, RoutesRecognized} from '@angular/router';
 import {SidenavSectionModel} from '../sidenav/shared/sidenav-section.model';
 import {filter, map, take} from 'rxjs/operators';
 import {MatSidenav} from '@angular/material';
@@ -51,6 +51,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit{
     blockDoc: boolean = false;
     userIsAdmin = false;
     mobileSearchPageIsHidden: boolean = true;
+    Act: boolean = true;
 
 
 
@@ -63,8 +64,10 @@ export class ToolbarComponent implements OnInit, AfterViewInit{
                 private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-      this.userIsAdmin = this.authService.userHasRole("admin")
-    }
+      this.userIsAdmin = this.authService.userHasRole("admin");
+      this.checkIfDocIsActive();
+
+  }
 
     ngAfterViewInit() {
     }
@@ -181,4 +184,16 @@ export class ToolbarComponent implements OnInit, AfterViewInit{
         this.authService.logout()
     }
 
+    private checkIfDocIsActive() {
+        this.router.events.subscribe(event => {
+            if (event instanceof RoutesRecognized ) {
+                const url = event['url'];
+                if(url === '/doc'){
+                    this.Act = false;
+                } else {
+                    this.Act = true;
+                }
+            }
+        });
+    }
 }

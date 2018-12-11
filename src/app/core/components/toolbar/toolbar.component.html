@@ -28,7 +28,7 @@
   <span class="fill"></span>
 
   <a [routerLink]="['api']"  fxHide fxShow.gt-sm>API</a>
-  <a [routerLink]="['doc']"  fxHide fxShow.gt-sm>Documentation</a>
+  <a [routerLink]="Act ? ['doc']: []"  fxHide fxShow.gt-sm>Documentation</a>
   <a [routerLink]="['clients']"   fxHide fxShow.gt-sm>Clients</a>
   <a *ngIf="userIsAdmin" [routerLink]="['permissions']"   fxHide fxShow.gt-sm>Permissions</a>
 

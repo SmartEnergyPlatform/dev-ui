@@ -206,8 +206,14 @@ export class SidenavComponent implements OnInit, AfterViewInit{
 
     private detectRouterChange() {
         this.router.events.subscribe(event => {
+
+
             if (event instanceof NavigationEnd) {
+
+
+
                 const url = event['url'];
+
                 if ( url !== '/') {
                     const section = this.sections.find(i => i.state === url);
                     if (typeof section !== 'undefined') {
