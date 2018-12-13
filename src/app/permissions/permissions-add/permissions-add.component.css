@@ -45,3 +45,10 @@ mat-step:nth-child(3) buttton[matsteppernext] {
 .control_buttons{
     color: white;
 }
+
+.radio-button {
+    margin-top: 1.5%;
+    margin-right: 5%;
+    margin-bottom: 1.5%;
+}
+

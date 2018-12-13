@@ -102,9 +102,7 @@ export class PermissionsListComponent implements OnInit {
   }
 
   deletePolicy(policy) {
-    // console.log("delete policy " + policy["id"])
     this.ladonService.deletePolicy(policy).then(response => {
-      // console.log(response)
       this.loadPolicies()
     })
   }

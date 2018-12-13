@@ -20,21 +20,23 @@
     <form [formGroup]="form">
         <mat-horizontal-stepper>
             <mat-step label="Subjekt">
-                <mat-form-field>
-                    <mat-select [(ngModel)]="subject" formControlName="subject" placeholder="User"[disabled]=btnDisable (click)="onChange('subject')">
+                <mat-radio-button class="radio-button" [checked]="!btnDisable" (click)="onChange('subject')">
+                    Role
+                </mat-radio-button>
+                <mat-radio-button class="radio-button" [checked]="btnDisable" (click)="onChange('role')">
+                    User
+                </mat-radio-button>
+                <mat-form-field *ngIf="btnDisable">
+                    <mat-select [(ngModel)]="subject" formControlName="subject" placeholder="User">
                         <mat-option *ngFor="let user of users" [value]="user.username">
-                            <div *ngIf="!btnDisable">
                                 {{user.username}}
-                            </div>
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-                <mat-form-field>
-                    <mat-select [(ngModel)]="subject" formControlName="subject" placeholder="Rolle" [disabled]=!btnDisable (click)="onChange('role')">
+                <mat-form-field *ngIf="!btnDisable">
+                    <mat-select [(ngModel)]="subject" formControlName="subject" placeholder="Role">
                         <mat-option *ngFor="let role of roles" [value]="role.name">
-                            <div *ngIf="btnDisable">
                                 {{role.name}}
-                            </div>
                         </mat-option>
                     </mat-select>
                 </mat-form-field>

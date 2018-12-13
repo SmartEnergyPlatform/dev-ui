@@ -30,6 +30,11 @@ import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 
 
+export interface Model {
+    id: string;
+    name: string;
+}
+
 @Component({
   selector: 'app-permissions-edit',
   templateUrl: './permissions-edit.component.html',
@@ -83,16 +88,20 @@ export class PermissionsEditComponent implements OnInit {
       private ladonService: LadonService,
       private router: Router,
       private authService: AuthService){
+
+      this.userManagementService.loadRoles().then((roles: Model) => {
+          this.roles = roles;
+          this.intbtnDisable();
+      });
+      this.userManagementService.loadUsers().then(users => this.users = users);
+
+      
   }
 
   ngOnInit() {
       this.userIsAdmin = this.authService.userHasRole("admin");
 
-
-      this.userManagementService.loadRoles().then(roles => this.roles = roles);
-      this.userManagementService.loadUsers().then(users => this.users = users);
-
-      this.uris = this.kongService.loadUris()
+      this.uris = this.kongService.loadUris();
 
       this.subject = this.route.snapshot.paramMap.get('subject'); // Subject
       this.actions = this.route.snapshot.paramMap.get('actions'); // Actions
@@ -108,10 +117,6 @@ export class PermissionsEditComponent implements OnInit {
               startWith(''),
               map(value => this._filter(value))
           );
-
-      this.btnDisable = false;
-
-
   }
 
 
@@ -207,7 +212,6 @@ export class PermissionsEditComponent implements OnInit {
     // autocomplete filter
     private _filter(value: string): string[] {
         const filterValue = value.toLowerCase();
-
         return this.uris.filter(option => option.toLowerCase().includes(filterValue));
     }
 
@@ -216,6 +220,15 @@ export class PermissionsEditComponent implements OnInit {
             this.btnDisable = false;
         } else {
             this.btnDisable = true;
+        }
+    }
+
+    intbtnDisable() {
+        const persons =  this.roles.find(x => x.name === this.subject);
+        if (persons === undefined) {
+          this.btnDisable = true;
+        } else {
+          this.btnDisable = false;
         }
     }
 }

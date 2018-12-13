@@ -20,29 +20,40 @@
   <form [formGroup]="form">
     <mat-horizontal-stepper>
       <mat-step label="Subjekt">
-        <mat-form-field>
-          <mat-select formControlName="subject" placeholder="User" [disabled]=btnDisable (click)="onChange('subject')">
+
+          <mat-radio-button class="radio-button" checked="checked" (click)="onChange('subject')">
+           Role
+        </mat-radio-button>
+          <mat-radio-button class="radio-button" (click)="onChange('role')">
+            User
+          </mat-radio-button>
+
+
+
+
+        <mat-form-field *ngIf="btnDisable">
+          <mat-select formControlName="subject" placeholder="User" >
             <mat-option *ngFor="let user of users" [value]="user.username">
-              <div *ngIf="!btnDisable">
                 {{user.username}}
-              </div>
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field>
-            <mat-select formControlName="subject" placeholder="Rolle" [disabled]=!btnDisable (click)="onChange('role')">
+
+        <mat-form-field *ngIf="!btnDisable">
+            <mat-select formControlName="subject" placeholder="Role">
               <mat-option *ngFor="let role of roles" [value]="role.name">
-                <div *ngIf="btnDisable">
                   {{role.name}}
-                </div>
               </mat-option>
             </mat-select>
         </mat-form-field>
+
         <div class="control_buttons">
           <button color="primary" mat-raised-button matStepperPrevious>Zurück</button>
           <button color="primary" mat-raised-button matStepperNext>Weiter</button>
         </div>
       </mat-step>
+
+
       <mat-step label="Regel">
         <div class="rule" [formGroup]="form['controls'].actions['controls'][i]" *ngFor="let action of form['controls'].actions['controls']; let i=index">
           <div class="action_checkboxes">
