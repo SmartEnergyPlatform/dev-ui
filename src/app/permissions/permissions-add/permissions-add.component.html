@@ -17,20 +17,15 @@
   -->
 
 <div *ngIf="userIsAdmin" class="outer">
-  <form [formGroup]="form">
+  <form [formGroup]="form['subject']">
     <mat-horizontal-stepper>
       <mat-step label="Subjekt">
-
           <mat-radio-button class="radio-button" checked="checked" (click)="onChange('subject')">
            Role
         </mat-radio-button>
           <mat-radio-button class="radio-button" (click)="onChange('role')">
             User
           </mat-radio-button>
-
-
-
-
         <mat-form-field *ngIf="btnDisable">
           <mat-select formControlName="subject" placeholder="User" >
             <mat-option *ngFor="let user of users" [value]="user.username">
@@ -38,7 +33,6 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-
         <mat-form-field *ngIf="!btnDisable">
             <mat-select formControlName="subject" placeholder="Role">
               <mat-option *ngFor="let role of roles" [value]="role.name">
@@ -46,7 +40,6 @@
               </mat-option>
             </mat-select>
         </mat-form-field>
-
         <div class="control_buttons">
           <button color="primary" mat-raised-button matStepperPrevious>Zurück</button>
           <button color="primary" mat-raised-button matStepperNext>Weiter</button>
