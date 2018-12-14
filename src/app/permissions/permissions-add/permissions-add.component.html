@@ -17,7 +17,7 @@
   -->
 
 <div *ngIf="userIsAdmin" class="outer">
-  <form [formGroup]="form">
+  <form [formGroup]="form['subject']">
     <mat-horizontal-stepper>
       <mat-step label="Subjekt">
           <mat-radio-button class="radio-button" checked="checked" (click)="onChange('subject')">
