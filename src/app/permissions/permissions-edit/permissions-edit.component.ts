@@ -76,8 +76,9 @@ export class PermissionsEditComponent implements OnInit {
   array_of_actions: string[];
 
     public form = this.fb.group({
-      subject: ["", Validators.pattern("\w+")],
-      actions: this.fb.array([])
+        role: this.route.snapshot.paramMap.get('subject'),
+        user: this.route.snapshot.paramMap.get('subject'),
+        actions: this.fb.array([])
     });
 
   constructor(
@@ -164,7 +165,7 @@ export class PermissionsEditComponent implements OnInit {
                 "Resources": ["<^(endpoints:" + this.resource.substring(1) + ").*>"],
                 "Effect": "allow",
                 "id": this.id
-            }
+            };
 
             if (this.get) policy["Actions"].push("GET")
             if (this.post) policy["Actions"].push("POST")

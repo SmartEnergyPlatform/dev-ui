@@ -54,13 +54,14 @@ export class PermissionsAddComponent implements OnInit {
 
   userIsAdmin: false;
   resource: string;
+  subject: string;
 
   myControl = new FormControl();
 
 
   public form = this.fb.group({
-  subject: ["", Validators.pattern("\w+")],
-  actions: this.fb.array([])
+    subject: '',
+    actions: this.fb.array([])
   });
 
   // options for autocomplete filter
@@ -124,8 +125,8 @@ export class PermissionsAddComponent implements OnInit {
   submit() {
     // Send list of policies to Ladon
     // Each Triple of Subject, Action and Resource become one policy
-    var form_value = this.form.value;
-    form_value["actions"].forEach(action => {
+    const form_value = this.form.value;
+      form_value["actions"].forEach(action => {
       var policy = {
         "Subjects": [form_value["subject"]],
         "Actions": [],

@@ -27,14 +27,14 @@
                     User
                 </mat-radio-button>
                 <mat-form-field *ngIf="btnDisable">
-                    <mat-select [(ngModel)]="subject" formControlName="subject" placeholder="User">
+                    <mat-select [(ngModel)]="subject" formControlName="user" placeholder="User">
                         <mat-option *ngFor="let user of users" [value]="user.username">
                                 {{user.username}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field *ngIf="!btnDisable">
-                    <mat-select [(ngModel)]="subject" formControlName="subject" placeholder="Role">
+                    <mat-select [(ngModel)]="subject" formControlName="role" placeholder="Role">
                         <mat-option *ngFor="let role of roles" [value]="role.name">
                                 {{role.name}}
                         </mat-option>
