@@ -96,7 +96,7 @@ export class SidenavComponent implements OnInit, AfterViewInit{
                 this.sidenav.close();
                 this.sidenav.mode = 'over';
                 this.sidenav.disableClose = false;
-                this.sidenav.fixedTopGap = 64;
+                this.sidenav.fixedTopGap = 0;
             } else {
                 this.sidenav.mode = 'side';
                 this.sidenav.open();
