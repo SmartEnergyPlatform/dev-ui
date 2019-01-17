@@ -1494,7 +1494,6 @@ html .md-nav__link[for=toc]~.md-nav {
   opacity: 0;
   z-index: 1
 }
-
 .md-search__form {
   position: relative
 }
@@ -1503,7 +1502,6 @@ html .md-nav__link[for=toc]~.md-nav {
   position: relative;
   padding: 0 4.4rem 0 7.2rem;
   text-overflow: ellipsis;
-  z-index: 2
 }
 
 [dir=rtl] .md-search__input {

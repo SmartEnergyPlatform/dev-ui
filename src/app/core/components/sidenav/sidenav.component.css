@@ -30,6 +30,7 @@ mat-sidenav {
     list-style: none;
     padding: 0;
     margin-top: 0;
+
 }
 
 .side-menu .menu-toggle-list a.mat-button {
@@ -94,9 +95,9 @@ mat-sidenav {
 .side-menu .mat-button {
     border-radius: 0;
     cursor: pointer;
-    line-height: 54px;
+    line-height: 64px;
     margin: 0;
-    max-height: 54px;
+    max-height: 64px;
     overflow: hidden;
     padding: 0px 5%;
     text-align: left;
