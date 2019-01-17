@@ -16,7 +16,7 @@
   ~
   -->
 
-<mat-sidenav-container>
+<mat-sidenav-container (backdropClick)="closeSidenav()">
     <mat-sidenav #sidenav
                  disableClose
                  role="navigation"
