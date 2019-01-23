@@ -34,7 +34,7 @@
 
   <form class="md-search__form" name="search" [ngClass]="{'search-focused': inputFocused}">
 
-      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="on"
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off"
            spellcheck="false" data-md-component="query" data-md-state="active" [(ngModel)]="searchQuery" (ngModelChange)="search()">
 
 
@@ -51,13 +51,13 @@
                 <p class="md-search-result__title">{{'START.PLAT_DOC' | translate }}</p>
               </article>
             </a>
-
             <a (click)="openSearchResult(result.url)" class="md-search-result__link" tabindex="-1" *ngFor="let result of docsSearchresult">
               <article class="md-search-result__article">
                 <p class="md-search-result__title">{{result.title}}</p>
-                <p class="md-search-result__teaser">{{result.content}}</p>
+                 <p class="md-search-result__teaser">{{result.content}}</p>
               </article>
             </a>
+
           </li>
         </ol>
       </div>

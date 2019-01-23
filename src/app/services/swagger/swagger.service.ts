@@ -29,7 +29,8 @@ import { ApiService } from '../api/api.service';
 
 @Injectable()
 export class SwaggerService {
-  constructor(private apiService: ApiService,private authService: AuthService) {}
+  constructor(private apiService: ApiService,
+              private authService: AuthService) {}
 
   getSwagger() {
     /*

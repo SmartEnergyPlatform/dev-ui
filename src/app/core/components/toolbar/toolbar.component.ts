@@ -103,9 +103,9 @@ export class ToolbarComponent implements OnInit, AfterViewInit{
             this.blockDoc = true;
             this.loadDocs().then(docs => {
                 (<any>docs).forEach(doc => {
-                    var foundInContent = this.queryOccursInContent(query,doc["content"]);
+                    var foundInContent = this.queryOccursInContent(query,doc["title"]);
                     if (foundInContent) {
-                        doc["content"] = doc["content"].slice(this.getIndexOfSearchResultInContent(query,doc["content"]));
+                        doc["title"] = doc["title"].slice(this.getIndexOfSearchResultInContent(query,doc["title"]));
                         this.docsSearchresult.push(doc)
                     }
                 });
@@ -132,11 +132,12 @@ export class ToolbarComponent implements OnInit, AfterViewInit{
 
             pages.forEach(page => {
                 async.push(this.httpClient.get("/assets/docs/" + page["assetUrl"] + ".md", {responseType: "text"}))
+
             });
             forkJoin(async).subscribe(results => {
                 for (let index = 0; index < results.length; index++) {
                     content.push({
-                        "content": this.removeMarkdownChars(results[index]),
+                        "content": pages[index]["title"],
                         "url": "/doc/" + pages[index]["redirectUrl"],
                         "title": pages[index]["title"]
                     });
