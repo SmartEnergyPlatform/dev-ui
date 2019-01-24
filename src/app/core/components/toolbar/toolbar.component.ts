@@ -148,8 +148,8 @@ export class ToolbarComponent implements OnInit, AfterViewInit{
     }
 
     queryOccursInContent(query, content) {
-        var regex = new RegExp(" " + query + "|^" + query);
-        var regexMatch = regex.exec(content);
+        var regex = new RegExp(query.toUpperCase());
+        var regexMatch = regex.exec(content.toUpperCase());
         if(regexMatch) {
             return true
         }
@@ -157,6 +157,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit{
     }
 
     getIndexOfSearchResultInContent(query, content) {
+
         var regex = new RegExp(" " + query + "|^" + query);
         var regexMatch = regex.exec(content);
         if(regexMatch) {
