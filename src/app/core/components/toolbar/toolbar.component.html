@@ -53,8 +53,8 @@
             </a>
             <a (click)="openSearchResult(result.url)" class="md-search-result__link" tabindex="-1" *ngFor="let result of docsSearchresult">
               <article class="md-search-result__article">
-                <p class="md-search-result__title">{{result.title}}</p>
-                 <p class="md-search-result__teaser">{{result.content}}</p>
+                <a class="md-search-result__title">{{result.title}}</a>
+                 <a class="md-search-result__teaser">{{result.content}}</a>
               </article>
             </a>
 

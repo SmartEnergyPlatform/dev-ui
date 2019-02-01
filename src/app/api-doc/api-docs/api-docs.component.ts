@@ -63,7 +63,6 @@ export class ApiDocsComponent implements OnInit {
   }
 
   search() {
-    console.log(this.query);
     this.swaggerListShown = this.swaggerList.filter(api => {
       return api["info"]["description"].indexOf(this.query) != -1 || api["info"]["title"].indexOf(this.query) != -1
     })

@@ -51,8 +51,6 @@ import { StartComponent } from './start/start.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {PermissionsDialogDeleteComponent} from './permissions/permissions-dialog-delete/permissions-dialog-delete.component';
 
-
-
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
