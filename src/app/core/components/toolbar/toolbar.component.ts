@@ -28,11 +28,11 @@ import {SidenavSectionModel} from '../sidenav/shared/sidenav-section.model';
 import {MatSidenav} from '@angular/material';
 
 // import markdownfiles
-import * as analytics from '!raw-loader!/Users/fgseits/Desktop/dev-ui/src/assets/docs/de/analytics.md';
-import * as getting from '!raw-loader!/Users/fgseits/Desktop/dev-ui/src/assets/docs/de/gettingstarted.md';
-import * as iot from '!raw-loader!/Users/fgseits/Desktop/dev-ui/src/assets/docs/de/iot.md';
-import * as process from '!raw-loader!/Users/fgseits/Desktop/dev-ui/src/assets/docs/de/process.md';
-import * as security from '!raw-loader!/Users/fgseits/Desktop/dev-ui/src/assets/docs/de/security.md';
+import * as analytics from '!raw-loader!../../../../assets/docs/de/analytics.md';
+import * as getting from '!raw-loader!../../../../assets/docs/de/gettingstarted.md';
+import * as iot from '!raw-loader!../../../../assets/docs/de/iot.md';
+import * as process from '!raw-loader!../../../../assets/docs/de/process.md';
+import * as security from '!raw-loader!../../../../assets/docs/de/security.md';
 
 @Component({
   selector: 'app-toolbar',
