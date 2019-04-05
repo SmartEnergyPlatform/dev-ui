@@ -61,7 +61,7 @@ const appRoutes: Routes = [
     component: StartComponent,
     canActivate: [ValidTokenGuard]
   }
-]
+];
 
 @NgModule({
   declarations: [
@@ -82,10 +82,9 @@ const appRoutes: Routes = [
     ApiDocModule,
     HttpClientModule,
     ReactiveFormsModule,
-      FormsModule,
-      FlexLayoutModule,
-      CoreModule,
-      TranslateModule.forRoot({
+    FormsModule,
+    FlexLayoutModule,
+    TranslateModule.forRoot({
       loader: {
           provide: TranslateLoader,
           useFactory: HttpLoaderFactory,
