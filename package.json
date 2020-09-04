@@ -32,7 +32,7 @@
     "ng2-ace-editor": "^0.3.8",
     "ngx-markdown": "^7.0.1",
     "ngx-md": "^7.0.0",
-    "node-sass": "^4.10.0",
+    "node-sass": "^4.13.1",
     "path": "^0.12.7",
     "prismjs": "^1.15.0",
     "remove-markdown": "^0.3.0",
