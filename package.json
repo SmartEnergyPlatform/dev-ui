@@ -34,7 +34,7 @@
     "ngx-md": "^7.0.0",
     "node-sass": "^4.10.0",
     "path": "^0.12.7",
-    "prismjs": "^1.15.0",
+    "prismjs": "^1.23.0",
     "remove-markdown": "^0.3.0",
     "request-promise": "^4.2.2",
     "rxjs": "^6.3.3",
